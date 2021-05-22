@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="utf-8">
+
+
+    <title>{% block title %}دوبیچو{% endblock %}</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="majazi">
+      <div class="toparea">
+        <div class="socialtop instatop">
+          <a href="https://www.instagram.com/accounts/login/?hl=de" target="_blank">
+            <img src="{% static 'image/2.png'%}" >
+          </a>
+        </div>
+        <div class="socialtop instatop">
+          <a href="https://telegram.org/blog/login" target="_blank">
+            <img src="{% static 'image/1.png' %}" >
+          </a>
+        </div>
+        <div class="socialtop instatop">
+          <a href="https://web.whatsapp.com/" target="_blank">
+            <img src="{% static 'image/5.png'%}" >
+          </a>
+        </div>
+        <div class="socialtop instatop">
+          <a href="https://twitter.com/twitt_login?lang=de" target="_blank">
+            <img src="{% static 'image/3.png'%}" >
+          </a>
+        </div>
+        <div class="socialtop instatop">
+          <a href="https://www.linkedin.com/login/de" target="_blank">
+            <img src="{% static '/image/4.png'%}" >
+          </a>
+        </div>
+      </div>
+
+
+            <p>TEL:09906784074</p>
+        </div>
+      </div>
+    <div id="header">
+      <div class="headbar">
+
+        <div class="searchbox">
+          <div class="headliststyle">
+            {% if user.is_authenticated %}
+              <ul class='headlist'>
+                <li class="li1"><a class="font2 top-buttonA" href="{% url 'cart:cart_detail' %}">سبد</a></li>
+                <li class="li1"><a class="font2 top-buttonA" href="{% url 'account:profile' %}">پروفایل</a></li>
+                <li class="li1"><a class="font2 top-buttonA" href="{% url 'account:dashboard' %}">سابقه خرید</a></li>
+
+              </ul>
+
+              {% else %}
+                <ul class='headlist'>
+                  <li class="li1"><a class="font2 top-buttonA" href="{% url 'account:register' %}">ثبت نام</a></li>
+                  <li class="li1"><a class="font2 top-buttonA" href="{% url 'account:logi' %}">ورود</a></li>
+
+                </ul>
+              {% endif %}
+          </div>
+          <form class="" action="{% url 'shop:searchb' %}" method="post">
+            {% csrf_token %}
+
+            {{searchform.searchtxt}}
+          <button type="button" name="button">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+          </form>
+        </div>
+        <center>
+
+            <div class="rightitemm">
+            <div class="rightitem">  
+                    <div class="">
+                      <h1>فروشگاه اینترنتی دوبیچو</h1>
+      
+                    </div>
+                    <img src="{% static 'image/22.jpg'%}" >
+          </div>
+
+             <div class="row">
+
+
+
+                <ul>
+                  <li><a href="{% url 'shop:contactus' %}">تماس با ما</a></li>
+                  <li><a href="{% url 'shop:aboutus' %}">درباره ما</a></li>
+                  <li><a href="{% url 'shop:mahsol' %}">همه محصولات</a></li>
+                  <li><a href="{% url 'blog:news' %}">دانستنی های خودرو</a></li>
+                  <li><a href="{% url 'blog:post_list' %}">خبرهای روز دوبیچو</a></li>
+                  <li><a href="{% url 'shop:product_list' %}">صفحه اصلی</a> </li>
+                </ul>
+
+              </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+    <div id="foot-head">
+        {% if user.is_authenticated %}
+        <div id="subheader">
+                <div class="user">
+                  <p style="direction: rtl;">خوش آمدین!:{{user.username}}</p>
+                  <form class="" action="{% url 'account:logout' %}" method="post">
+                    {% csrf_token %}
+
+                    <button type="submit" name="button">خروج</button>
+                  </form>
+                </div>
+              <div class="cart" style="direction: rtl;">
+                {% with total_items=cart|length %}
+                  {% if total_items > 0 %}
+                    سبد شما:
+                    <a href="{% url 'cart:cart_detail' %}">
+                      {{ total_items }} item{{ total_items|pluralize }},
+                      تومان{{ cart.get_total_price }}
+                    </a>
+                  {% else %}
+                    <p style="direction: rtl;">سبد شما خالی است.</p>
+                  {% endif %}
+                {% endwith %}
+              </div>
+          </div>
+          {% endif %}
+    </div>
+
+    <div id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div id="footer">
+
+
+        <div class="footleft">
+          <h3>ارتباط با ما</h3>
+
+          <ul>
+            <li><p>فروشگاه اینترنتی دوبیچو برندی جهانی با مدیریت شکاریان در خدمت شما دوستان است<p></li>
+          </ul>
+            <li><p>telephone:09906784074</p></li>
+            <li><p>email :cor1@apsahi.com</p></li>
+        </div>
+        <div class="footmid">
+          <h3>دفاتر فروش</h3>
+          <ul>
+            <li> <p>دفاتر فروش : شیراز</p>  </li>
+            <li> <p>دفاتر فروش:تهران</p></li>
+
+          </ul>
+        </div>
+        <div class="footright">
+            <img src="{% static '/image/nemad2.png'%}" >
+            <a target="_blank" rel="origin" href="https://trustseal.enamad.ir/?id=190321&amp;Code=NCL5k7eqZa2uHETV55mg"><img src="https://Trustseal.eNamad.ir/logo.aspx?id=190321&amp;Code=NCL5k7eqZa2uHETV55mg" alt="" style="cursor:pointer" id="NCL5k7eqZa2uHETV55mg"></a>
+        </div>
+    </div>
+  </body>
+</html>

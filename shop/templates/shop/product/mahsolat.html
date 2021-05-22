@@ -1,0 +1,48 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+  {% if category %}برند های فروشگاه دوبیچو{% endif %}
+{% endblock %}
+{% block content %}
+
+{% for item in simg %}
+  {% if loop.first %}<img src="{{simg.image.url}}" alt="">{% endif %}
+  {% if loop.last %}<img src="{{simg.image.url}}" alt="">{% endif %}
+  
+
+{% endfor %}
+
+<div class="allpro">
+
+
+
+<div id="main" class="product-list">
+
+        {% for c in Brands %}
+
+        <div class="item">
+
+
+          <a href="{{ c.get_absolute_url }}">
+            <img src="{% if c.image %}{{ c.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+          </a>
+          <div class="itemtext">
+          <a href="{{ c.get_absolute_url }}">
+              {{ c.name }}<br>
+            {% if c.number == 0 %}
+                <p>موجود نیست</p>
+              {% endif %}
+              {{ c.price }} ریال<br>
+              خودرو:{{c.category}}<br>
+               برند:{{c.Brand}} <br>
+              کد: {{c.codenum}}<br>
+      
+              </a>
+            </div>
+        </div>
+
+        {% endfor %}
+</div>
+</div>
+
+{% endblock %}

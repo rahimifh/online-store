@@ -1,0 +1,63 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+{% block content %}
+<center>
+
+  <div class="product-detail">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}
+    {% static "img/no_image.png" %}{% endif %}">
+    <h1>{{ product.name }}</h1>
+    <h2>
+      <a href="{{ product.category.get_absolute_url }}">
+        {{ product.category }}<br>
+        {{ product.Brand }}<br>
+        {{ product.codenum }}<br>
+        {{ product.country }}<br>
+        {{ product.size }}<br>
+
+      </a>
+    </h2>
+    <p class="price">تومان{{ product.price }}</p>
+    <form action="{% url "cart:cart_add" product.id %}" method="post">
+      {{ cart_product_form }}
+      {% csrf_token %}
+      <input type="submit" value="افزودن به سبد خرید">
+    </form>
+    {{ product.description|linebreaks }}
+  </div><br>
+
+  <br><br><br><br><br>
+    {% with comments.count as total_comments %}
+    <h2>
+    {{ total_comments }} نظرها {{ total_comments|pluralize }}
+    </h2>
+    {% endwith %}
+
+
+  {% for comment in comments %}
+    <div class="comment">
+      <p class="info">
+     نظر{{ forloop.counter }} با  {{ comment.name }}
+      {{ comment.created }}
+      </p>
+      {{ comment.body|linebreaks }}
+    </div>
+  {% empty %}
+    <p>هنوز نظری وجود ندارد</p>
+  {% endfor %}
+  {% if new_comment %}
+    <h2>نظر شما اضافه شد.</h2>
+  {% else %}
+  <h2>نظر جدیدی اضافه کنید</h2>
+  <form method="post">
+  {{ comment_form.as_p }}
+  {% csrf_token %}
+  <p><input type="submit" value="ثبت نظر"></p>
+  </form>
+  </center>
+{% endif %}
+
+{% endblock %}
