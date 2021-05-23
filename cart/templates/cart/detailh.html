@@ -59,6 +59,14 @@ Your shopping cart
   </p>
 <br>
 <br>
+<form class="" action="{% url 'shop:searwho' %}" method="post">
+  {% csrf_token %}
+
+  {{searchform.searchtxt}}
+<button type="button" name="button">
+  <i class="fa fa-search" aria-hidden="true"></i>
+</button>
+</form>
 <div class="pbox">
   <div class="box1">
       <p>خرید</p>
@@ -119,7 +127,7 @@ Your shopping cart
     {% else %}
       {% static 'img/no_image.png' %}
     {% endif %}
-  </div>  
+  </div>
 </div>
   {% endfor %}
 <br>
