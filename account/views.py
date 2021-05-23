@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from .models import Profile,wholesale_pass
 from orders.models import Order
 from shop.models import Product
-
+from shop.forms import Searchbox
 from cart.forms import wh_CartAddProductForm
 # Create your views here.
 
@@ -37,7 +37,7 @@ def dashboard(request):
     for i in user_Orders:
         order_item = i.items.filter()
         list.append(order_item)
-    return render(request,'account/dashboard.html',{'section': 'dashboard', 'orders':user_Orders, 'item':list})
+    return render(request,'account/dashboard.html',{'section': 'dashboard', 'orders':user_Orders, 'item':lis,'searchform':Searchbox})
 
 def user_login(request):
     if request.method == 'POST':
@@ -91,7 +91,7 @@ def profile (request):
     else:
         form = wholesaler
         pro = None
-    return render(request, 'account/profile.html', {'data':data, 'user':userr,'pass':form, 'product':pro,'cart_product_form':wh_CartAddProductForm})
+    return render(request, 'account/profile.html', {'data':data, 'user':userr,'pass':form, 'product':pro,'cart_product_form':wh_CartAddProductForm,'searchform':Searchbox})
 @login_required
 def wholesale (request):
 
@@ -109,5 +109,5 @@ def wholesale (request):
             data= data= userr.profile
             data.check = True
             data.save()
-            return render (request, 'account/wholesaler.html', {'test': 'لیست کالا', 'product':prod, 'cart_product_form':wh_CartAddProductForm,'data':data})
+            return render (request, 'account/wholesaler.html', {'test': 'لیست کالا', 'product':prod, 'cart_product_form':wh_CartAddProductForm,'data':data,'searchform':Searchbox})
     return render (request, 'account/wholesaler.html', {'test': 'کد وارد شده اشتباه است '})

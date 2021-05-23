@@ -47,6 +47,17 @@ def About_us (request):
         return render(request,'shop/product/aboutus.html',{'searchform':Searchbox})
 def contact_us (request):
     return render(request,'shop/product/contactus.html',{'searchform':Searchbox})
+def searchwho_us (request):
+    form = Searchbox(request.POST)
+    if form.is_valid():
+        text =form.cleaned_data['searchtxt']
+        list = []
+        products = Product.objects.all()
+        for item in products:
+            product_name = item.name
+            if text in product_name:
+                list.append(item)
+    return render(request, 'shop/product/search_resultwh.html',{'prolist':list,'searchform':Searchbox})
 def searchb_us (request):
     form = Searchbox(request.POST)
     if form.is_valid():
