@@ -6,6 +6,7 @@ from .forms import CartAddProductForm, wh_CartAddProductForm
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
 from shop.models import Product
+from shop.forms import Searchbox
 @login_required
 @require_POST
 def cart_add(request, product_id):
@@ -51,4 +52,4 @@ def cart_detail_h(request):
         item['update_quantity_form'] = wh_CartAddProductForm(initial={'quantity': item['quantity'],'override': True})
     if data.check == True:
         product = Product.objects.all()
-    return render(request, 'cart/detailh.html', {'cart': cart,'product':product, 'cart_product_form':wh_CartAddProductForm})
+    return render(request, 'cart/detailh.html', {'cart': cart,'product':product, 'cart_product_form':wh_CartAddProductForm,'searchform':Searchbox})

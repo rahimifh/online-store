@@ -24,14 +24,16 @@
 <center>
 
 <a href="{% url 'cart:cart_detail_h' %}"><button type="button" name="button"><h3>سبد خرید عمده</h3></button></a>
-<form class="" action="{% url 'shop:searwho' %}" method="post">
-  {% csrf_token %}
+<div class="searchb">
+  <form class="" action="{% url 'shop:searwho' %}" method="post">
+    {% csrf_token %}
 
-  {{searchform.searchtxt}}
-<button type="button" name="button">
-  <i class="fa fa-search" aria-hidden="true"></i>
-</button>
-</form>
+    {{searchform.searchtxt}}
+  <button type="button" name="button">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+  </form>
+</div>
 </center>
 <div class="pbox">
   <div class="box1">

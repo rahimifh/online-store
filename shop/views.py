@@ -4,7 +4,7 @@ from cart.forms import CartAddProductForm
 from .forms import CommentForm,Searchbox
 import time
 from blog.models import Post,DanPost
-
+from cart.forms import wh_CartAddProductForm
 # Create your views here.
 def product_list(request, category_slug=None):
     category = None
@@ -57,7 +57,7 @@ def searchwho_us (request):
             product_name = item.name
             if text in product_name:
                 list.append(item)
-    return render(request, 'shop/product/search_resultwh.html',{'prolist':list,'searchform':Searchbox})
+    return render(request, 'shop/product/search_resultwh.html',{'prolist':list,'searchform':Searchbox,'cart_product_form':wh_CartAddProductForm})
 def searchb_us (request):
     form = Searchbox(request.POST)
     if form.is_valid():
