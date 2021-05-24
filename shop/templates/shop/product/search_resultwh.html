@@ -2,6 +2,7 @@
 {% block title %}سرچ{% endblock %}
 {% block content %}
 {% load static %}
+{% load humanize %}
 
 <div class="searchb">
   <form class="" action="{% url 'shop:searwho' %}" method="post">
@@ -51,7 +52,7 @@
       </form>
   </div>
   <div class="box">
-    <p>{{i.wholesale_price}}</p>
+    <p>{{i.wholesale_price|intcomma}}</p>
   </div>
   <div class="box">
     <p>{{i.codenum}}</p>
