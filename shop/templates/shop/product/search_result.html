@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %}
 {% load static %}
+{% load humanize %}
 {% block title %}
   {{ product.name }}
 {% endblock %}
@@ -18,7 +19,7 @@
         {% if i.number == 0 %}
           <p>موجود نیست</p>
         {% endif %}
-        {{i.price }} ریال<br>
+        {{i.price|intcomma }} ریال<br>
         خودرو:{{i.category}}<br>
          برند:{{i.Brand}} <br>
         کد: {{i.codenum}}<br>
