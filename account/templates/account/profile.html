@@ -2,6 +2,7 @@
 {% block title %}پروفایل{% endblock %}
 {% block content %}
 {% load static %}
+{% load humanize %}
   <h1>حساب کاربری شما</h1>
   {{data.user}}<br>
   {{data.date_of_birth}}<br>
@@ -72,7 +73,7 @@
       </form>
   </div>
   <div class="box">
-    <p>{{i.wholesale_price}}</p>
+    <p>{{i.wholesale_price|intcomma}}</p>
   </div>
   <div class="box">
     <p>{{i.codenum}}</p>

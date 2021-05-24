@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %}
 {% load static %}
+{% load humanize %}
 {% block title %}
   {% if category %}{{ category.name }}{% else %}دوبیچو{% endif %}
 {% endblock %}
@@ -104,9 +105,9 @@
               {% if product.baseprice != product.price %}
               {{product.baseprice}}ریال<br>
               {{product.discount}}%<br>
-              {{ product.price }} ریال<br>
+              {{ product.price|intcomma }} ریال<br>
               {%else%}
-              {{ product.price }} ریال<br>
+              {{ product.price|intcomma }} ریال<br>
               {% endif %}
               خودرو:{{product.category}}<br>
                برند:{{product.Brand}} <br>
