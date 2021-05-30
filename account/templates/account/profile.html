@@ -9,9 +9,13 @@
   {% if data.photo %}
     <img src="{{data.photo.url}}" alt="image"><br>
   {% endif %}
-  {{user.email}}
+  <p>{{data.first_name}}</p>
+  <p>{{data.last_name}}</p>
+  <p>{{data.email}}</p>
 
-  <p>خوش آمدین به داشبورد خودتون شما می تونین <a href="{% url 'account:edit' %}"> ویرایش پروفایل</a> یا <a href="{% url 'account:password_change' %}"> تغییر رمز عبور </a> انجام دهید</p><<br>
+
+  <p>خوش آمدین به داشبورد خودتون شما می تونین <a href="{% url 'account:edit' %}"> ویرایش پروفایل</a> یا <a href="{% url 'account:password_change' %}"> تغییر رمز عبور </a> انجام دهید</p><br>
+  <a href="{% url 'account:edit' %}"><button type="button" name="button"><h3>ویرایش پروفایل</h3></button></a>
 {% if pass %}
   <p>این فیلد مخصوص همکاران است </p>
   <form class="" action="{% url 'account:wholsaler' %}" method="post">

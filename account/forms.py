@@ -26,14 +26,14 @@ class UserRegistrationForm(forms.ModelForm):
 
 #******003
 
-class UserEditForm(forms.ModelForm):
+'''class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email')'''
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('date_of_birth', 'photo')
+        fields = ('first_name','last_name','email','address','postal_code','phone','city', 'photo')
 
 class wholesaler (forms.Form):
     hpass = forms.CharField (max_length=100, widget=forms.TextInput(attrs={'class':'FnT', 'placeholder':'code' }))

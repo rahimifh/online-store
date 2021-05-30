@@ -4,6 +4,10 @@ body {
     padding:0;
     width: 100vw;
     font-family: IRANSans;
+    direction:rtl;
+}
+p{
+  direction:rtl;
 }
 ul{
   list-style-type: none;
