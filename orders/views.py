@@ -1,8 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from .models import OrderItem,wh_OrderItem
-
-from django.contrib.auth.models import User
 from .forms import OrderCreateForm,wh_OrderCreateForm
 from cart.cart import Cart
 from .tasks import order_created
@@ -37,7 +35,7 @@ def admin_order_detail(request, order_id):
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = OrderCreateForm(instance=request.user.profile,data=request.POST,files=request.FILES)
+        form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
             order.user_order=request.user
@@ -77,7 +75,7 @@ def wh_admin_order_pdf(request, order_id):
 def wh_order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = wh_OrderCreateForm(instance=request.user.profile,data=request.POST,files=request.FILES)
+        form = wh_OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
             order.user_order=request.user
