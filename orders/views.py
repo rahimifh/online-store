@@ -1,6 +1,8 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from .models import OrderItem,wh_OrderItem
+
+from django.contrib.auth.models import User
 from .forms import OrderCreateForm,wh_OrderCreateForm
 from cart.cart import Cart
 from .tasks import order_created
@@ -35,7 +37,7 @@ def admin_order_detail(request, order_id):
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
+        form = OrderCreateForm(instance=request.user.profile,data=request.POST,files=request.FILES)
         if form.is_valid():
             order = form.save(commit=False)
             order.user_order=request.user
@@ -51,7 +53,7 @@ def order_create(request):
             # redirect for payment
             return redirect(reverse('payment:process'))
     else:
-        form = OrderCreateForm()
+        form = OrderCreateForm(instance=request.user.profile)
         return render(request,'orders/order/create.html',{'cart': cart, 'form': form})
 #**************************************
 @staff_member_required
@@ -75,7 +77,7 @@ def wh_admin_order_pdf(request, order_id):
 def wh_order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = wh_OrderCreateForm(request.POST)
+        form = wh_OrderCreateForm(instance=request.user.profile,data=request.POST,files=request.FILES)
         if form.is_valid():
             order = form.save(commit=False)
             order.user_order=request.user
@@ -91,7 +93,7 @@ def wh_order_create(request):
             # redirect for payment
             return redirect(reverse('orders:done'))
     else:
-        form = wh_OrderCreateForm()
+        form = wh_OrderCreateForm(instance=request.user.profile)
         return render(request,'orders/order/whcreate.html',{'cart': cart, 'form': form})
 def done(request):
     return render(request, 'orders/order/whcreated.html')
